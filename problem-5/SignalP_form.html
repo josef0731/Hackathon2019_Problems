@@ -1,0 +1,107 @@
+<!-- Submission form starts here -->
+
+<form	enctype="multipart/form-data"
+	action="/cgi-bin/webface2.fcgi"
+	method="POST">
+<input	type=HIDDEN name=configfile
+	value="/usr/opt/www/pub/CBS/services/SignalP-4.1/SignalP.cf">
+
+<h3>SUBMISSION</h3>
+<p>
+<i>Paste a single amino acid sequence or several sequences in
+<a href="/services/fasta.example.html" target="_blank">FASTA</a>
+format into the field below:</i>
+<br>
+<textarea name="SEQPASTE" rows=3 cols=64>
+</textarea>
+<p>
+<i>Submit a file in
+<a href="/services/fasta.example.html" target="_blank">FASTA</a>
+format directly from your local disk:</i>
+<br>
+<input name="SEQSUB" size=64 type="file">
+<p>
+<table width="100%">
+
+<tr>
+<td width="32%" valign=top>
+  <b>Organism group</b> (<a href="instructions.php#orgtype" target="_blank">explain</a>)<br>
+  <input name="orgtype" id="orgtype" type="radio" value="euk"
+   onclick="setvalue('orgtype','euk');   setvalue('Dcut-noTM',Dcut_noTM()); setvalue('Dcut-TM',Dcut_TM());" checked>
+   Eukaryotes<br>
+  <input name="orgtype" id="orgtype" type="radio" value="gram-"
+   onclick="setvalue('orgtype','gram-'); setvalue('Dcut-noTM',Dcut_noTM()); setvalue('Dcut-TM',Dcut_TM());">
+   Gram-negative bacteria<br>
+  <input name="orgtype" id="orgtype" type="radio" value="gram+"
+   onclick="setvalue('orgtype','gram+'); setvalue('Dcut-noTM',Dcut_noTM()); setvalue('Dcut-TM',Dcut_TM());">
+   Gram-positive bacteria<br>
+<td width="32%" valign=top>
+  <b>D-cutoff values</b> (<a href="instructions.php#cutoff" target="_blank">explain</a>)<br>
+  <table>
+  <tr><td><input name="Dcut-type" id="Dcut-type" type="radio" value="default"
+   onclick="setvalue('Dcut-type','default'); setvalue('Dcut-noTM',Dcut_noTM()); setvalue('Dcut-TM',Dcut_TM());" checked>
+   <td colspan=2 valign=bottom>Default (optimized for correlation)
+  <tr><td><input name="Dcut-type" id="Dcut-type" type="radio" value="ver3"
+   onclick="setvalue('Dcut-type','ver3');    setvalue('Dcut-noTM',Dcut_noTM()); setvalue('Dcut-TM',Dcut_TM());">
+   <td colspan=2 valign=bottom>Sensitive (reproduce SignalP 3.0's sensitivity)
+  <tr><td><input name="Dcut-type" id="Dcut-type" type="radio" value="user" onclick="setvalue('Dcut-noTM','');setvalue('Dcut-TM','');">
+   <td colspan=2  valign=bottom>User defined:
+  <tr>
+    <td><td><input name="Dcut-noTM" id="Dcut-noTM" size=2 value="0.45"> <td><i> D-cutoff for SignalP-noTM networks</i>
+  <tr>
+    <td><td><input name="Dcut-TM" id="Dcut-TM" size=2 value="0.50"> <td><i> D-cutoff for SignalP-TM networks</i>
+  </table>
+<td width="36%" align="left" valign=top>
+  <b>Graphics output</b> (<a href="instructions.php#graphics" target="_blank">explain</a>)<br>
+  <input name="graphmode" type="radio" value="">No graphics<br>
+  <input name="graphmode" type="radio" value="png" checked><b>PNG</b> (inline)
+    <br>
+  <input name="graphmode" type="radio" value="png+eps"><b>PNG</b> (inline)
+    and <b>EPS</b> (as links)<br>
+
+<tr>
+<td valign=top>
+  <b>Output format</b> (<a href="instructions.php#output" target="_blank">explain</a>)<br>
+  <input name="format" type="radio" value="summary" checked>Standard<br>
+  <input name="format" type="radio" value="short">Short (no graphics)<br>
+  <input name="format" type="radio" value="long">Long<br>
+  <input name="format" type="radio" value="all">All - SignalP-noTM and SignalP-TM output (no graphics)<br>
+<td valign=top>
+  <b>Method</b> (<a href="instructions.php#method" target="_blank">explain</a>)<br>
+  <input name="method" type="radio" value="best" checked>Input sequences may include TM regions<br>
+  <input name="method" type="radio" value="notm">Input sequences do not include TM regions<br>
+<td valign=top>
+  <b>Positional limits</b> (<a href="instructions.php#limits" target="_blank">explain</a>)<br>
+  <table>
+  <tr>
+    <td><input name="minlen" size=2> <td>Minimal predicted signal peptide length. <i>Default: 10</i>
+  <tr>
+    <td><input name="trunc" size=2>
+    <td>N-terminal truncation of input sequence (0 means no truncation).<br>
+    <i>Default: Truncate sequence to a length of 70 aa</i><br>
+  </tr>
+  </table>
+</table>
+
+<p>
+<input type="submit" value="Submit">
+<input type="reset" value="Clear fields">
+<p>
+<b>Restrictions:</b>
+<br>
+<!--
+<i>At most 4,000 sequences and 2,000,000 amino acids per submission;
+   each sequence not more than 5,000 amino acids.</i>
+<p>
+-->
+<i>At most 2,000 sequences and 200,000 amino acids per submission;
+   each sequence not more than 6,000 amino acids.</i>
+<p>
+
+<b>Confidentiality:</b>
+<br>
+<i>The sequences are kept confidential and will be deleted
+   after processing.</i>
+</form>
+
+<!-- Submission form ends here -->
